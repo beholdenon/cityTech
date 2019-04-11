@@ -6,7 +6,6 @@ var logger = require('morgan');
 var exphbs  = require('express-handlebars');
 var helpers = require('handlebars-helpers')();
 var sassMiddleware = require('node-sass-middleware');
-var dotenv = require('dotenv');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -37,9 +36,6 @@ app.use(sassMiddleware({
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-// env vars
-//process.env.NODE_ENV === "dev"
 
 // routes
 app.use('/', indexRouter);
