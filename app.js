@@ -4,20 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var exphbs  = require('express-handlebars');
+var helpers = require('handlebars-helpers')();
 var sassMiddleware = require('node-sass-middleware');
 var dotenv = require('dotenv');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-
+// init app
 var app = express();
 
 // read env
 dotenv.config();
 
 // view engine setup
-var hbs = exphbs.create({});
+var hbs = exphbs.create({helpers:helpers});
 app.engine('.hbs', exphbs({extname: '.hbs', defaultLayout: 'main'}));
 app.set('view engine', '.hbs');
 
@@ -40,9 +41,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // env vars
 //process.env.NODE_ENV === "dev"
 
+// routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
